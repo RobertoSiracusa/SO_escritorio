@@ -35,6 +35,15 @@ function copySampleFiles() {
   if (fs.existsSync(sampleVideo) && !fs.existsSync(destVideo)) {
     fs.copyFileSync(sampleVideo, destVideo);
   }
+
+  const musicDir = path.join(FS_ROOT, 'Musica');
+  if (!fs.existsSync(musicDir)) fs.mkdirSync(musicDir, { recursive: true });
+
+  const sampleAudio = path.join(__dirname, 'file_example_MP3_700KB.mp3');
+  const destAudio = path.join(musicDir, 'file_example_MP3_700KB.mp3');
+  if (fs.existsSync(sampleAudio) && !fs.existsSync(destAudio)) {
+    fs.copyFileSync(sampleAudio, destAudio);
+  }
 }
 
 function createWindow() {

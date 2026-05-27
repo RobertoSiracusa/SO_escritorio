@@ -54,13 +54,31 @@ const VideoPlayerApp = {
     const dataUrl = await window.electronAPI.fsReadFileBinary(path);
     if (!dataUrl) return;
     const name = path.split('/').pop();
-    const win = wm.createWindow('videoplayer_view', `Video - ${name}`, '🎬', { width: 750, height: 500, allowMultiple: true });
-    win.body.innerHTML = `
-      <div class="videoplayer-app">
-        <div class="video-container">
-          <video controls autoplay style="max-width:100%;max-height:100%;"><source src="${dataUrl}"></video>
+    const ext = name.split('.').pop().toLowerCase();
+    const audioExts = ['mp3', 'wav', 'ogg', 'flac', 'aac'];
+    const isAudio = audioExts.includes(ext);
+    const icon = isAudio ? '🎵' : '🎬';
+    const label = isAudio ? 'Audio' : 'Video';
+    const win = wm.createWindow('videoplayer_view', `${label} - ${name}`, icon, { width: isAudio ? 450 : 750, height: isAudio ? 200 : 500, allowMultiple: true });
+
+    if (isAudio) {
+      win.body.innerHTML = `
+        <div class="videoplayer-app" style="align-items:center;justify-content:center;display:flex;">
+          <div style="text-align:center;padding:20px;width:100%;">
+            <div style="font-size:48px;margin-bottom:12px;">🎵</div>
+            <div style="margin-bottom:16px;opacity:0.7;">${name}</div>
+            <audio controls autoplay style="width:90%;"><source src="${dataUrl}"></audio>
+          </div>
         </div>
-      </div>
-    `;
+      `;
+    } else {
+      win.body.innerHTML = `
+        <div class="videoplayer-app">
+          <div class="video-container">
+            <video controls autoplay style="max-width:100%;max-height:100%;"><source src="${dataUrl}"></video>
+          </div>
+        </div>
+      `;
+    }
   }
 };
