@@ -27,10 +27,11 @@ function ensureDataDirs() {
 }
 
 function copySampleFiles() {
+  const samplesDir = path.join(__dirname, 'samples');
+
   const videosDir = path.join(FS_ROOT, 'Videos');
   if (!fs.existsSync(videosDir)) fs.mkdirSync(videosDir, { recursive: true });
-
-  const sampleVideo = path.join(__dirname, 'file_example_MP4_480_1_5MG.mp4');
+  const sampleVideo = path.join(samplesDir, 'file_example_MP4_480_1_5MG.mp4');
   const destVideo = path.join(videosDir, 'file_example_MP4_480_1_5MG.mp4');
   if (fs.existsSync(sampleVideo) && !fs.existsSync(destVideo)) {
     fs.copyFileSync(sampleVideo, destVideo);
@@ -38,11 +39,18 @@ function copySampleFiles() {
 
   const musicDir = path.join(FS_ROOT, 'Musica');
   if (!fs.existsSync(musicDir)) fs.mkdirSync(musicDir, { recursive: true });
-
-  const sampleAudio = path.join(__dirname, 'file_example_MP3_700KB.mp3');
+  const sampleAudio = path.join(samplesDir, 'file_example_MP3_700KB.mp3');
   const destAudio = path.join(musicDir, 'file_example_MP3_700KB.mp3');
   if (fs.existsSync(sampleAudio) && !fs.existsSync(destAudio)) {
     fs.copyFileSync(sampleAudio, destAudio);
+  }
+
+  const imagesDir = path.join(FS_ROOT, 'Imagenes');
+  if (!fs.existsSync(imagesDir)) fs.mkdirSync(imagesDir, { recursive: true });
+  const sampleImage = path.join(samplesDir, 'icono.png');
+  const destImage = path.join(imagesDir, 'icono.png');
+  if (fs.existsSync(sampleImage) && !fs.existsSync(destImage)) {
+    fs.copyFileSync(sampleImage, destImage);
   }
 }
 
