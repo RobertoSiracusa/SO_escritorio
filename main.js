@@ -23,6 +23,18 @@ function ensureDataDirs() {
       lastUser: 'admin'
     }));
   }
+  copySampleFiles();
+}
+
+function copySampleFiles() {
+  const videosDir = path.join(FS_ROOT, 'Videos');
+  if (!fs.existsSync(videosDir)) fs.mkdirSync(videosDir, { recursive: true });
+
+  const sampleVideo = path.join(__dirname, 'file_example_MP4_480_1_5MG.mp4');
+  const destVideo = path.join(videosDir, 'file_example_MP4_480_1_5MG.mp4');
+  if (fs.existsSync(sampleVideo) && !fs.existsSync(destVideo)) {
+    fs.copyFileSync(sampleVideo, destVideo);
+  }
 }
 
 function createWindow() {

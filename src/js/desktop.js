@@ -46,7 +46,8 @@ const Desktop = {
     return [
       { id: 'folder_docs', type: 'folder', name: 'Documentos', icon: '📁', x: 20, y: 10, path: '/Documentos' },
       { id: 'folder_imgs', type: 'folder', name: 'Imágenes', icon: '🖼️', x: 20, y: 110, path: '/Imagenes' },
-      { id: 'folder_vids', type: 'folder', name: 'Videos', icon: '🎬', x: 20, y: 210, path: '/Videos' }
+      { id: 'folder_vids', type: 'folder', name: 'Videos', icon: '🎬', x: 20, y: 210, path: '/Videos' },
+      { id: 'file_sample_video', type: 'file', name: 'Video Demo.mp4', icon: '🎬', x: 20, y: 310, path: '/Videos/file_example_MP4_480_1_5MG.mp4' }
     ];
   },
 
@@ -112,6 +113,17 @@ const Desktop = {
   openDesktopIcon(iconData) {
     if (iconData.type === 'folder') {
       FileManagerApp.open(iconData.path);
+    } else if (iconData.type === 'file') {
+      const ext = iconData.path.split('.').pop().toLowerCase();
+      const videoExts = ['mp4', 'webm', 'ogg', 'avi', 'mkv'];
+      const imageExts = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp'];
+      if (videoExts.includes(ext)) {
+        VideoPlayerApp.openVideo(iconData.path);
+      } else if (imageExts.includes(ext)) {
+        GalleryApp.openImage(iconData.path);
+      } else {
+        NotepadApp.openFile(iconData.path, iconData.name);
+      }
     }
   },
 
