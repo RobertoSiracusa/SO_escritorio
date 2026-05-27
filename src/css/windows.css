@@ -1,0 +1,150 @@
+/* macOS-style window management */
+.app-window {
+  position: absolute;
+  min-width: 400px;
+  min-height: 300px;
+  background: rgba(30,30,30,0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 10px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  pointer-events: all;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: box-shadow 0.2s;
+}
+
+.app-window.focused {
+  box-shadow: 0 15px 50px rgba(0,0,0,0.7);
+  z-index: 100;
+}
+
+.app-window.minimized {
+  transform: scale(0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.app-window.maximized {
+  top: 28px !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: calc(100vh - 28px) !important;
+  border-radius: 0;
+}
+
+.window-titlebar {
+  display: flex;
+  align-items: center;
+  height: 38px;
+  padding: 0 12px;
+  background: rgba(50,50,50,0.9);
+  cursor: default;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.window-controls {
+  display: flex;
+  gap: 8px;
+  margin-right: 12px;
+}
+
+.window-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  color: transparent;
+  transition: color 0.1s;
+}
+
+.window-btn:hover {
+  color: rgba(0,0,0,0.6);
+}
+
+.window-btn.close {
+  background: #ff5f57;
+}
+
+.window-btn.minimize {
+  background: #febc2e;
+}
+
+.window-btn.maximize {
+  background: #28c840;
+}
+
+.window-btn.close:hover {
+  background: #ff3b30;
+}
+
+.window-title {
+  flex: 1;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0.8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.window-body {
+  flex: 1;
+  overflow: auto;
+  position: relative;
+}
+
+/* Resize handles */
+.resize-handle {
+  position: absolute;
+  z-index: 10;
+}
+
+.resize-handle.right {
+  top: 0;
+  right: -3px;
+  width: 6px;
+  height: 100%;
+  cursor: ew-resize;
+}
+
+.resize-handle.bottom {
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  cursor: ns-resize;
+}
+
+.resize-handle.corner {
+  bottom: -3px;
+  right: -3px;
+  width: 12px;
+  height: 12px;
+  cursor: nwse-resize;
+}
+
+.resize-handle.left {
+  top: 0;
+  left: -3px;
+  width: 6px;
+  height: 100%;
+  cursor: ew-resize;
+}
+
+.resize-handle.top {
+  top: -3px;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  cursor: ns-resize;
+}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SimulOS</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="css/desktop.css">
+  <link rel="stylesheet" href="css/taskbar.css">
+  <link rel="stylesheet" href="css/windows.css">
+  <link rel="stylesheet" href="css/apps.css">
+</head>
+<body>
+  <!-- Login Screen -->
+  <div id="login-screen" class="login-screen">
+    <div class="login-clock">
+      <div id="login-time" class="login-time"></div>
+      <div id="login-date" class="login-date"></div>
+    </div>
+    <div class="login-container">
+      <div id="user-list" class="user-list"></div>
+      <div id="login-form" class="login-form" style="display:none;">
+        <div id="login-avatar" class="login-avatar"></div>
+        <div id="login-username" class="login-username-display"></div>
+        <input type="password" id="login-password" class="login-input" placeholder="Contraseña" autocomplete="off">
+        <button id="login-btn" class="login-btn">Iniciar Sesión</button>
+        <button id="login-back" class="login-back">← Volver</button>
+        <div id="login-error" class="login-error"></div>
+      </div>
+    </div>
+    <div class="login-bottom">
+      <button id="shutdown-btn" class="shutdown-btn" title="Apagar">⏻</button>
+    </div>
+  </div>
+
+  <!-- Desktop -->
+  <div id="desktop" class="desktop" style="display:none;">
+    <div id="desktop-icons" class="desktop-icons"></div>
+    <div id="windows-container" class="windows-container"></div>
+
+    <!-- Taskbar macOS style -->
+    <div id="taskbar" class="taskbar">
+      <div class="taskbar-left">
+        <div class="apple-menu" id="apple-menu-btn">
+          <span class="apple-logo">🍎</span>
+          <span class="os-name">SimulOS</span>
+        </div>
+        <div id="active-app-name" class="active-app-name"></div>
+      </div>
+      <div class="taskbar-center">
+        <div id="taskbar-clock" class="taskbar-clock"></div>
+      </div>
+      <div class="taskbar-right">
+        <div class="system-tray">
+          <span id="tray-cpu" class="tray-item" title="CPU">🔲 0%</span>
+          <span id="tray-ram" class="tray-item" title="RAM">💾 0%</span>
+          <span id="tray-user" class="tray-item" title="Usuario">👤</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Apple Menu Dropdown -->
+    <div id="apple-menu-dropdown" class="apple-menu-dropdown" style="display:none;">
+      <div class="menu-item" id="menu-about">Acerca de SimulOS</div>
+      <div class="menu-separator"></div>
+      <div class="menu-item" id="menu-sysinfo">Monitor del Sistema</div>
+      <div class="menu-item" id="menu-settings">Preferencias del Sistema</div>
+      <div class="menu-separator"></div>
+      <div class="menu-item" id="menu-switch-user">Cambiar Usuario</div>
+      <div class="menu-item" id="menu-logout">Cerrar Sesión</div>
+      <div class="menu-separator"></div>
+      <div class="menu-item" id="menu-shutdown">Apagar</div>
+    </div>
+
+    <!-- Dock macOS style -->
+    <div id="dock" class="dock">
+      <div class="dock-item" data-app="filemanager" title="Gestor de Archivos">
+        <div class="dock-icon">📁</div>
+        <span class="dock-label">Archivos</span>
+      </div>
+      <div class="dock-item" data-app="browser" title="Navegador Web">
+        <div class="dock-icon">🌐</div>
+        <span class="dock-label">Navegador</span>
+      </div>
+      <div class="dock-item" data-app="terminal" title="Terminal">
+        <div class="dock-icon">⬛</div>
+        <span class="dock-label">Terminal</span>
+      </div>
+      <div class="dock-item" data-app="calculator" title="Calculadora">
+        <div class="dock-icon">🧮</div>
+        <span class="dock-label">Calculadora</span>
+      </div>
+      <div class="dock-item" data-app="notepad" title="Bloc de Notas">
+        <div class="dock-icon">📝</div>
+        <span class="dock-label">Notas</span>
+      </div>
+      <div class="dock-item" data-app="gallery" title="Galería">
+        <div class="dock-icon">🖼️</div>
+        <span class="dock-label">Galería</span>
+      </div>
+      <div class="dock-item" data-app="videoplayer" title="Reproductor de Video">
+        <div class="dock-icon">🎬</div>
+        <span class="dock-label">Videos</span>
+      </div>
+      <div class="dock-item" data-app="sysmonitor" title="Monitor del Sistema">
+        <div class="dock-icon">📊</div>
+        <span class="dock-label">Monitor</span>
+      </div>
+      <div class="dock-item" data-app="devices" title="Dispositivos">
+        <div class="dock-icon">🔌</div>
+        <span class="dock-label">Dispositivos</span>
+      </div>
+      <div class="dock-item" data-app="antivirus" title="Antivirus">
+        <div class="dock-icon">🛡️</div>
+        <span class="dock-label">Antivirus</span>
+      </div>
+      <div class="dock-separator"></div>
+      <div class="dock-item" data-app="pong" title="Pong">
+        <div class="dock-icon">🏓</div>
+        <span class="dock-label">Pong</span>
+      </div>
+      <div class="dock-item" data-app="minesweeper" title="Buscaminas">
+        <div class="dock-icon">💣</div>
+        <span class="dock-label">Buscaminas</span>
+      </div>
+      <div class="dock-item" data-app="snake" title="Snake">
+        <div class="dock-icon">🐍</div>
+        <span class="dock-label">Snake</span>
+      </div>
+    </div>
+
+    <!-- Right-click context menu -->
+    <div id="context-menu" class="context-menu" style="display:none;">
+      <div class="context-item" id="ctx-new-folder">Nueva Carpeta</div>
+      <div class="context-item" id="ctx-change-wallpaper">Cambiar Fondo</div>
+      <div class="context-item" id="ctx-sysinfo">Monitor del Sistema</div>
+      <div class="context-item" id="ctx-terminal">Abrir Terminal</div>
+    </div>
+  </div>
+
+  <script src="js/windowManager.js"></script>
+  <script src="js/login.js"></script>
+  <script src="js/desktop.js"></script>
+  <script src="js/taskbar.js"></script>
+  <script src="js/apps/filemanager.js"></script>
+  <script src="js/apps/browser.js"></script>
+  <script src="js/apps/terminal.js"></script>
+  <script src="js/apps/calculator.js"></script>
+  <script src="js/apps/notepad.js"></script>
+  <script src="js/apps/gallery.js"></script>
+  <script src="js/apps/videoplayer.js"></script>
+  <script src="js/apps/sysmonitor.js"></script>
+  <script src="js/apps/devices.js"></script>
+  <script src="js/apps/antivirus.js"></script>
+  <script src="js/apps/pong.js"></script>
+  <script src="js/apps/minesweeper.js"></script>
+  <script src="js/apps/snake.js"></script>
+  <script src="js/apps/settings.js"></script>
+</body>
+</html>

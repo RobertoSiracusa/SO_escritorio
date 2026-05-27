@@ -1,0 +1,18 @@
+{
+  "name": "simulos",
+  "version": "1.0.0",
+  "description": "Sistema Operativo de Escritorio Simulado",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev"
+  },
+  "author": "Roberto Siracusa",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^35.0.0"
+  },
+  "dependencies": {
+    "systeminformation": "^5.25.0"
+  }
+}
