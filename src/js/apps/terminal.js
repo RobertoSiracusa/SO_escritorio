@@ -71,7 +71,12 @@ const TerminalApp = {
       cls: () => { output.innerHTML = ''; },
 
       ls: async (args) => {
-        const path = args[0] ? resolvePath(args[0]) : fs.currentDir;
+        let path = fs.currentDir;
+        if (args[0]) {
+          const r = await resolvePathReal(args[0]);
+          if (!r.exists) { print(`Error: no existe: ${resolvePath(args[0])}`, '#f55'); return; }
+          path = r.path;
+        }
         const items = await window.electronAPI.fsReadDir(path);
         if (items.length === 0) {
           print('(directorio vacío)', '#888');
@@ -90,9 +95,12 @@ const TerminalApp = {
           updatePrompt();
           return;
         }
-        const target = resolvePath(args[0]);
-        const items = await window.electronAPI.fsReadDir(target);
-        fs.currentDir = target;
+        const r = await resolvePathReal(args[0]);
+        if (!r.exists) {
+          print(`Error: directorio no encontrado: ${resolvePath(args[0])}`, '#f55');
+          return;
+        }
+        fs.currentDir = r.path;
         updatePrompt();
       },
 
@@ -112,10 +120,11 @@ const TerminalApp = {
 
       cat: async (args) => {
         if (!args[0]) { print('Uso: cat <archivo>', '#f55'); return; }
-        const path = resolvePath(args[0]);
-        const content = await window.electronAPI.fsReadFile(path);
+        const r = await resolvePathReal(args[0]);
+        if (!r.exists) { print(`Error: archivo no encontrado: ${resolvePath(args[0])}`, '#f55'); return; }
+        const content = await window.electronAPI.fsReadFile(r.path);
         if (content === null) {
-          print(`Error: archivo no encontrado: ${path}`, '#f55');
+          print(`Error: no se pudo leer: ${r.path}`, '#f55');
         } else {
           print(content || '(archivo vacío)', '#fff');
         }
@@ -135,10 +144,11 @@ const TerminalApp = {
 
       rm: async (args) => {
         if (!args[0]) { print('Uso: rm <ruta>', '#f55'); return; }
-        const path = resolvePath(args[0]);
-        const result = await window.electronAPI.fsDelete(path);
-        if (result) print(`Eliminado: ${path}`, '#5f5');
-        else print(`No encontrado: ${path}`, '#f55');
+        const r = await resolvePathReal(args[0]);
+        if (!r.exists) { print(`No encontrado: ${resolvePath(args[0])}`, '#f55'); return; }
+        const result = await window.electronAPI.fsDelete(r.path);
+        if (result) print(`Eliminado: ${r.path}`, '#5f5');
+        else print(`Error al eliminar: ${r.path}`, '#f55');
       },
 
       pwd: () => print(fs.currentDir, '#fff'),
@@ -248,6 +258,22 @@ const TerminalApp = {
       }
       const base = fs.currentDir === '/' ? '' : fs.currentDir;
       return base + '/' + p;
+    };
+
+    const resolvePathReal = async (p) => {
+      const raw = resolvePath(p);
+      const segments = raw.split('/').filter(Boolean);
+      let resolved = '/';
+      for (const seg of segments) {
+        const items = await window.electronAPI.fsReadDir(resolved);
+        const match = items.find(i => i.name.toLowerCase() === seg.toLowerCase());
+        if (match) {
+          resolved = match.path;
+        } else {
+          return { path: raw, exists: false };
+        }
+      }
+      return { path: resolved || '/', exists: true };
     };
 
     const execute = async (cmdLine) => {
