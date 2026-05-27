@@ -26,23 +26,23 @@ Sistema operativo de escritorio simulado desarrollado con **HTML**, **CSS**, **J
 ### Aplicaciones
 | App | Descripción |
 |-----|-------------|
-| 📁 **Gestor de Archivos** | Navegación, crear carpetas/archivos, importar, abrir por tipo |
-| 🌐 **Navegador Web** | Navegador completo con webview, barra de URL, historial |
-| ⬛ **Terminal** | 20+ comandos personalizados (ls, cd, mkdir, cat, neofetch, sysinfo, etc.) |
-| 🧮 **Calculadora** | Estilo macOS con operaciones básicas |
-| 📝 **Bloc de Notas** | Editor de texto con guardar/abrir en sistema de archivos virtual |
-| 🖼️ **Galería** | Visor de imágenes con grid de miniaturas e importación |
-| 🎬 **Reproductor de Video** | Reproductor con controles e importación de archivos |
-| 🔌 **Dispositivos** | Detección de dispositivos de entrada y salida del sistema |
-| 🛡️ **Antivirus** | Escáner simulado con progreso, log y detección de amenazas ficticias |
-| ⚙️ **Preferencias** | Cambiar fondo de pantalla, gestionar usuarios |
+| **Gestor de Archivos** | Navegación, crear carpetas/archivos, importar, abrir por tipo |
+| **Navegador Web** | Navegador completo con webview, barra de URL, historial |
+| **Terminal** | 20+ comandos personalizados (ls, cd, mkdir, cat, neofetch, sysinfo, etc.) |
+| **Calculadora** | Estilo macOS con operaciones básicas |
+| **Bloc de Notas** | Editor de texto con guardar/abrir en sistema de archivos virtual |
+| **Galería** | Visor de imágenes con grid de miniaturas e importación |
+| **Reproductor de Video** | Reproductor con controles e importación de archivos |
+| **Dispositivos** | Detección de dispositivos de entrada y salida del sistema |
+| **Antivirus** | Escáner simulado con progreso, log y detección de amenazas ficticias |
+| **Preferencias** | Cambiar fondo de pantalla, gestionar usuarios |
 
 ### Juegos
 | Juego | Descripción |
 |-------|-------------|
-| 🏓 **Pong** | 2 jugadores (W/S y ↑/↓) |
-| 💣 **Buscaminas** | 10x10 con 15 minas, banderas con clic derecho |
-| 🐍 **Snake** | Controles con flechas o WASD, velocidad progresiva |
+| **Pong** | 2 jugadores (W/S y flechas) |
+| **Buscaminas** | 10x10 con 15 minas, banderas con clic derecho |
+| **Snake** | Controles con flechas o WASD, velocidad progresiva |
 
 ### Terminal — Comandos Disponibles
 ```
