@@ -292,6 +292,8 @@
   flex-direction: column;
   background: #1c1c1e;
   padding: 16px;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .calc-display {
@@ -303,6 +305,7 @@
   min-height: 80px;
   overflow: hidden;
   margin-bottom: 12px;
+  flex-shrink: 0;
 }
 
 .calc-buttons {
@@ -310,6 +313,8 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
   flex: 1;
+  max-height: 400px;
+  align-content: end;
 }
 
 .calc-btn {
@@ -321,7 +326,11 @@
   align-items: center;
   justify-content: center;
   transition: filter 0.1s;
+  width: 100%;
+  max-width: 72px;
+  max-height: 72px;
   aspect-ratio: 1;
+  margin: 0 auto;
 }
 
 .calc-btn:hover {
@@ -351,6 +360,9 @@
   grid-column: span 2;
   border-radius: 40px;
   aspect-ratio: auto;
+  max-width: 152px;
+  width: 100%;
+  max-height: 72px;
   padding: 0 24px;
   justify-content: flex-start;
 }
